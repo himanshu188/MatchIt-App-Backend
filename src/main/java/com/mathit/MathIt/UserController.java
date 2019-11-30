@@ -20,7 +20,7 @@ public class UserController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         if(user.password.equals(password)){
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(user.getId(), HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
