@@ -15,14 +15,18 @@ public class UserController {
     UserRepository userRepository;
     @RequestMapping("/get")
     public ResponseEntity find(@RequestParam String username, @RequestParam String password){
-        if(userRepository.findByUsername(username) == null){
+        User user = null;
+        if((user = userRepository.findByUsername(username)) == null){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(HttpStatus.OK);
+        if(user.password.equals(password)){
+            return new ResponseEntity(user.getId(), HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
     @RequestMapping("/put")
     public void put(@RequestParam Integer id, @RequestParam String name, @RequestParam String password){
-       userRepository.save(new User(id, name, password));
+       userRepository.save(new User(name, password));
     }
 //    TODO: Put Mapping for any Error
     @RequestMapping("/check")

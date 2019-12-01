@@ -16,14 +16,25 @@ public class User {
 
     }
 
-    User(Integer id, String first, String last){
-        this.id = id;
+    User(String first, String last){
         this.username = first;
         this.password = last;
     }
 
     public String getUsername(){
         return username;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public String getPassword(){
