@@ -21,6 +21,9 @@ public class ProfileController {
     ProfileRepository profileRepository;
 
     @Autowired
+    private AmazonClient amazonClient;
+
+    @Autowired
     private
     SequenceGeneratorService sequenceGeneratorService;
 
@@ -34,12 +37,9 @@ public class ProfileController {
     public void put(@RequestParam String name, @RequestParam String tag, @RequestParam String interest, @RequestParam String city, @RequestParam String movies
             , @RequestParam String sports, @RequestParam String food, @RequestParam String social_media, @RequestParam Integer age, MultipartFile file){
         Profile profile = null;
-        try {
             profile = new Profile(name, tag, interest, city, movies
-                                             , sports, food, social_media, age, new Binary(BsonBinarySubType.BINARY, file.getBytes()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                                             , sports, food, social_media, age, amazonClient.uploadFile(file));
+
         Integer next_id = sequenceGeneratorService.generateSequence(Profile.SEQUENCE_NAME);
         profile.setId(next_id.toString());
        profileRepository.save(profile);

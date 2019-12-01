@@ -1,7 +1,6 @@
 package com.mathit.MathIt;
 
 import lombok.Data;
-import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -31,7 +30,7 @@ public class Profile {
     String interest;
     String city;
 
-    Binary binary;
+    String photo;
     String movies;
     String sports;
     String food;
@@ -43,12 +42,12 @@ public class Profile {
     }
 
 
-    public Binary getBinary() {
-        return binary;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setBinary(Binary binary) {
-        this.binary = binary;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
     public String getName() {
         return name;
@@ -123,7 +122,7 @@ public class Profile {
     }
 
     Profile(String name, String tag, String interest, String city, String movies
-            , String sports, String food, String social_media, Integer age, Binary binary){
+            , String sports, String food, String social_media, Integer age, String photo){
         this.name = name;
         this.tag = tag;
         this.interest = interest;
@@ -133,7 +132,7 @@ public class Profile {
         this.food = food;
         this.social_media = social_media;
         this.age = age;
-        this.binary = binary;
+        this.photo = photo;
     }
 
     public void setId(String id){
