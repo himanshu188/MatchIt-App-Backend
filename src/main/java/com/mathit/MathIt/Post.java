@@ -11,6 +11,15 @@ public class Post {
     Integer id;
     String title;
     String content;
+    String photo;
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
 
     Post(){
 
