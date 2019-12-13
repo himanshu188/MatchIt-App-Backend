@@ -33,6 +33,39 @@ public class ProfileController {
     }
 
 
+    @RequestMapping("/update/{id}")
+    public void update(@PathVariable("id") String id, @RequestParam Optional<String> tag, @RequestParam Optional<String> interest, @RequestParam Optional<String> city, @RequestParam Optional<String> movies
+            , @RequestParam Optional<String> sports, @RequestParam Optional<String> food, @RequestParam Optional<String> social_media){
+        Optional<Profile> profile = profileRepository.findById(id);
+        if(profile.isPresent()) {
+            Profile profile1 = profile.get();
+            if(tag.isPresent()){
+                profile1.tag = tag.get();
+            }
+            if(interest.isPresent()){
+                profile1.interest = interest.get();
+            }
+            if(city.isPresent()){
+                profile1.city = city.get();
+            }
+            if(movies.isPresent()){
+                profile1.movies = movies.get();
+            }
+            if(sports.isPresent()){
+                profile1.sports = sports.get();
+            }
+            if(food.isPresent()){
+                profile1.food = food.get();
+            }
+            if(social_media.isPresent()){
+                profile1.social_media = social_media.get();
+            }
+        }
+        if(profile.isPresent()){
+            profileRepository.save(profile.get());
+        }
+    }
+
     @RequestMapping("/put")
     public void put(@RequestParam String name, @RequestParam String tag, @RequestParam String interest, @RequestParam String city, @RequestParam String movies
             , @RequestParam String sports, @RequestParam String food, @RequestParam String social_media, @RequestParam Integer age, MultipartFile file){
@@ -44,9 +77,4 @@ public class ProfileController {
         profile.setId(next_id.toString());
        profileRepository.save(profile);
     }
-////    TODO: Put Mapping for any Error
-//    @RequestMapping("/check")
-//    public ResponseEntity test(){
-//        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//    }
 }
