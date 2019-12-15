@@ -7,12 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private
     UserRepository userRepository;
+
+    @Autowired
+    private
+    SequenceGeneratorService sequenceGeneratorService;
+
     @RequestMapping("/get")
     public ResponseEntity find(@RequestParam String username, @RequestParam String password){
         User user = null;
@@ -24,6 +32,17 @@ public class UserController {
         }
         return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
+
+    @RequestMapping("/signup")
+    public ResponseEntity signUp(@RequestParam Optional<String> fullName, @RequestParam String username, @RequestParam String password){
+        User user = new User(username, password);
+        Integer next_id = sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
+
+        user.setId(next_id.toString());
+        userRepository.save(user);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
     @RequestMapping("/put")
     public void put(@RequestParam Integer id, @RequestParam String name, @RequestParam String password){
        userRepository.save(new User(name, password));

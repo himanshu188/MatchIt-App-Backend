@@ -22,12 +22,23 @@ public class SequenceGeneratorService {
     }
     public Integer generateSequence(String seqName){
 
-        Profile counter = mongoOperations.findAndModify(Query.query(
-                where("_id").is(seqName)
-        ), new Update().inc("seq",1),
-                FindAndModifyOptions.options()
-                .returnNew(true)
-                .upsert(true), Profile.class);
-        return !Objects.isNull(counter) ? counter.getSeq() : 1;
+        if(seqName.equals("profile_section")){
+            Profile counter = mongoOperations.findAndModify(Query.query(
+                    where("_id").is(seqName)
+                    ), new Update().inc("seq",1),
+                    FindAndModifyOptions.options()
+                            .returnNew(true)
+                            .upsert(true), Profile.class);
+            return !Objects.isNull(counter) ? counter.getSeq() : 1;
+        } else if(seqName.equals("user_section")){
+            User counter = mongoOperations.findAndModify(Query.query(
+                    where("_id").is(seqName)
+                    ), new Update().inc("seq",1),
+                    FindAndModifyOptions.options()
+                            .returnNew(true)
+                            .upsert(true), User.class);
+            return !Objects.isNull(counter) ? counter.getSeq() : 1;
+        }
+        return 0;
     }
 }
