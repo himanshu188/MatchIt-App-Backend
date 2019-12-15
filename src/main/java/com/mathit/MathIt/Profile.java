@@ -134,6 +134,9 @@ public class Profile {
         this.age = age;
         this.photo = photo;
     }
+    Profile(String name){
+        this.name = name;
+    }
 
     public void setId(String id){
         this.id = id;

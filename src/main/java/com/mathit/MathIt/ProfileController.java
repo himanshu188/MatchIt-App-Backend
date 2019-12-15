@@ -66,6 +66,14 @@ public class ProfileController {
         }
     }
 
+    @RequestMapping("/create")
+    public void create(@RequestParam String name){
+        Profile profile = null;
+        profile = new Profile(name);
+        Integer next_id = sequenceGeneratorService.generateSequence(Profile.SEQUENCE_NAME);
+        profile.setId(next_id.toString());
+        profileRepository.save(profile);
+    }
     @RequestMapping("/put")
     public void put(@RequestParam String name, @RequestParam String tag, @RequestParam String interest, @RequestParam String city, @RequestParam String movies
             , @RequestParam String sports, @RequestParam String food, @RequestParam String social_media, @RequestParam Integer age, MultipartFile file){
