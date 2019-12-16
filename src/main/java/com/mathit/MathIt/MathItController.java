@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MathItController {
+//    Test REST API for Application
     @RequestMapping("/test")
     public String testing(){
         return "hello world";

@@ -11,6 +11,7 @@ import java.util.Objects;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
+//Service for generating auto Increment ID for the database
 @Service
 public class SequenceGeneratorService {
 

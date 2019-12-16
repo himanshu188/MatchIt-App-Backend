@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document(collection = "profile")
 public class Profile {
-
+//  Profile Entity
     @Transient
     public static  final String SEQUENCE_NAME ="profile_section";
 

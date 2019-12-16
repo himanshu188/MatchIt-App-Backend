@@ -21,16 +21,8 @@ public class PostController {
     private List<Entity> entities;
     @RequestMapping("/get")
     public List<Post> find(){
+//        Get all the Posts from Database
         List<Post> posts = postRepository.findAll();
         return posts;
     }
-//    @RequestMapping("/put")
-//    public void put(@RequestParam Integer id, @RequestParam String name, @RequestParam String password){
-//       postRepository.save(new User(name, password));
-//    }
-////    TODO: Put Mapping for any Error
-//    @RequestMapping("/check")
-//    public ResponseEntity test(){
-//        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//    }
 }

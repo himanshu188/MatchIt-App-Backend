@@ -24,6 +24,7 @@ import java.util.Date;
 public class AmazonClient {
     private AmazonS3 s3client;
 
+//    Amazon Client for Managing the File Upload to AWS S3
     @Value("${aws.access.key.id}") String awsKeyId;
     @Value("${aws.access.key.secret}") String awsKeySecret;
     @Value("${aws.region}") String awsRegion;
@@ -46,6 +47,7 @@ public class AmazonClient {
             .withCannedAcl(CannedAccessControlList.PublicRead));
     }
 
+//    Upload any given file to S3
     public String uploadFile(MultipartFile multipartFile){
         String url = "https://mathit-application.s3.amazonaws.com";
         try{

@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+// Post Entity as per the Database in MongoDB
 @Data
 @Document(collection = "posts")
 public class Post {

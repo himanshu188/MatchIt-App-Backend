@@ -21,6 +21,7 @@ public class UserController {
     private
     SequenceGeneratorService sequenceGeneratorService;
 
+//    Find if User exists for the given credentials
     @RequestMapping("/get")
     public ResponseEntity find(@RequestParam String username, @RequestParam String password){
         User user = null;
@@ -33,6 +34,7 @@ public class UserController {
         return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
 
+//    Signup End point for Registering new User
     @RequestMapping("/signup")
     public ResponseEntity signUp(@RequestParam Optional<String> fullName, @RequestParam String username, @RequestParam String password){
         User user = new User(username, password);
@@ -41,15 +43,5 @@ public class UserController {
         user.setId(next_id.toString());
         userRepository.save(user);
         return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @RequestMapping("/put")
-    public void put(@RequestParam Integer id, @RequestParam String name, @RequestParam String password){
-       userRepository.save(new User(name, password));
-    }
-//    TODO: Put Mapping for any Error
-    @RequestMapping("/check")
-    public ResponseEntity test(){
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

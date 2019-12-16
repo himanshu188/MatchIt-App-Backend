@@ -1,16 +1,9 @@
 package com.mathit.MathIt;
 
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.text.html.parser.Entity;
-import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,12 +20,14 @@ public class ProfileController {
     private
     SequenceGeneratorService sequenceGeneratorService;
 
+//    Get the particular Profile of a User
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public Optional<Profile> findById(@PathVariable("id") String id){
         return profileRepository.findById(id);
     }
 
 
+//    Update the Profile of User
     @RequestMapping("/update/{id}")
     public void update(@PathVariable("id") String id, @RequestParam Optional<String> tag, @RequestParam Optional<String> interest, @RequestParam Optional<String> city, @RequestParam Optional<String> movies
             , @RequestParam Optional<String> sports, @RequestParam Optional<String> food, @RequestParam Optional<String> social_media){
@@ -66,6 +61,7 @@ public class ProfileController {
         }
     }
 
+//    Create Profile of User once it's signup
     @RequestMapping("/create")
     public void create(@RequestParam String name){
         Profile profile = null;
@@ -74,6 +70,7 @@ public class ProfileController {
         profile.setId(next_id.toString());
         profileRepository.save(profile);
     }
+//    Create the profile with given details
     @RequestMapping("/put")
     public void put(@RequestParam String name, @RequestParam String tag, @RequestParam String interest, @RequestParam String city, @RequestParam String movies
             , @RequestParam String sports, @RequestParam String food, @RequestParam String social_media, @RequestParam Integer age, MultipartFile file){
